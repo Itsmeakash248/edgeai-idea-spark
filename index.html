@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EdgeAI Idea Spark | Inspire Innovation with AI</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>EdgeAI Idea Spark</h1>
+        <p>Brainstorm low-power AI solutions for your big ideas—MIB style 🚀</p>
+    </header>
+    <section id="input">
+        <h2>Enter Your Challenge</h2>
+        <form id="idea-form">
+            <input type="text" id="challenge" placeholder="e.g., sustainable urban farming" required>
+            <button type="submit">Spark Ideas!</button>
+        </form>
+    </section>
+    <section id="output" style="display:none;">
+        <h2>Your EdgeAI Ideas</h2>
+        <div id="ideas-list"></div>
+        <button onclick="saveIdea()">Save to Local Ideas</button>
+        <button onclick="exportCard()">Export as Card</button>
+    </section>
+    <section id="saved">
+        <h2>Saved Sparks</h2>
+        <ul id="saved-list"></ul>
+    </section>
+    <script src="script.js"></script>
+</body>
+</html>
