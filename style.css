@@ -86,11 +86,114 @@ button:hover {
   backdrop-filter: blur(10px);
 }
 
+#chat-container {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  padding: 20px;
+  margin-top: 20px;
+  min-height: 300px;
+  max-height: 60vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  text-align: left;
+}
+
+.message {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.message.user {
+  justify-content: flex-end;
+}
+
+.message.ai {
+  justify-content: flex-start;
+}
+
+.message-icon {
+  font-size: 1.8em;
+  padding: 5px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.message.user .message-icon {
+  order: 2; /* Icon after text for user */
+}
+
+.message-bubble {
+  padding: 12px 18px;
+  border-radius: 20px;
+  max-width: 70%;
+  line-height: 1.5;
+  word-wrap: break-word;
+}
+
+.message.user .message-bubble {
+  background: linear-gradient(45deg, #007bff, #0056b3); /* Blue gradient for user */
+  color: white;
+  border-bottom-right-radius: 2px; /* Sharpen corner */
+}
+
+.message.ai .message-bubble {
+  background: linear-gradient(45deg, #28a745, #1e7e34); /* Green gradient for AI */
+  color: white;
+  border-bottom-left-radius: 2px; /* Sharpen corner */
+}
+
+#prompt-form {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+  justify-content: center;
+}
+
+#prompt-form input[type="text"] {
+  flex: 1;
+  max-width: 500px;
+  padding: 15px;
+  border: none;
+  border-radius: 25px;
+  font-size: 16px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  text-align: left; /* Align text left for chat input */
+  padding-left: 20px;
+}
+
+#prompt-form button {
+  padding: 15px 30px;
+  background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+  color: white;
+  border: none;
+  border-radius: 25px;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s;
+}
+
+#prompt-form button:hover {
+  transform: scale(1.05);
+}
+
+/* Adjustments for smaller screens */
 @media (max-width: 600px) {
-  .input-group {
+  #prompt-form {
     flex-direction: column;
   }
-  input[type="text"] {
+  #prompt-form input[type="text"] {
     max-width: none;
+    text-align: center;
+  }
+  .message-bubble {
+    max-width: 85%;
   }
 }

@@ -11,13 +11,12 @@
     <h1>🚀 EdgeAI Idea Spark</h1>
     <p>Generate innovative AI business ideas for edge devices (IoT, embedded systems, etc.)</p>
     
-    <div class="input-group">
-      <input type="text" id="prompt" placeholder="e.g., 'Smart farming with AI sensors'" value="Explain edge AI for sustainable agriculture in 3 ideas">
-      <button id="generate">Spark Ideas!</button>
-    </div>
-    
-    <div id="loading" class="loading hidden">Generating... ✨</div>
-    <div id="output" class="output"></div>
+    <div id="chat-container"></div>
+
+    <form id="prompt-form">
+      <input type="text" id="prompt" placeholder="e.g., 'Smart farming with AI sensors'" autocomplete="off">
+      <button type="submit">Spark Ideas!</button>
+    </form>
   </div>
   
   <script type="module" src="script.js"></script>
