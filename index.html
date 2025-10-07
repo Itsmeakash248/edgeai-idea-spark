@@ -3,31 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EdgeAI Idea Spark | Inspire Innovation with AI</title>
+    <title>EdgeAI Idea Spark Pro | AI-Powered Innovation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header>
-        <h1>EdgeAI Idea Spark</h1>
-        <p>Brainstorm low-power AI solutions for your big ideas—MIB style 🚀</p>
-    </header>
-    <section id="input">
-        <h2>Enter Your Challenge</h2>
-        <form id="idea-form">
-            <input type="text" id="challenge" placeholder="e.g., sustainable urban farming" required>
-            <button type="submit">Spark Ideas!</button>
-        </form>
-    </section>
-    <section id="output" style="display:none;">
-        <h2>Your EdgeAI Ideas</h2>
-        <div id="ideas-list"></div>
-        <button onclick="saveIdea()">Save to Local Ideas</button>
-        <button onclick="exportCard()">Export as Card</button>
-    </section>
-    <section id="saved">
-        <h2>Saved Sparks</h2>
-        <ul id="saved-list"></ul>
-    </section>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <h1>EdgeAI Idea Spark <sup>Pro</sup></h1>
+                <p>Generate novel low-power AI solutions with a real generative model 🚀</p>
+            </div>
+        </header>
+
+        <main>
+            <section id="input-section" class="card">
+                <h2>1. Enter Your Challenge</h2>
+                <form id="idea-form">
+                    <input type="text" id="challenge" placeholder="e.g., monitor beehive health" required>
+                    <button type="submit" id="generate-btn">
+                        <i class="fa-solid fa-lightbulb"></i> Spark Ideas!
+                    </button>
+                </form>
+            </section>
+
+            <section id="output-section" class="card" style="display:none;">
+                <h2>2. AI-Generated Sparks</h2>
+                <div id="loader" style="display:none;">
+                    <div class="spinner"></div>
+                    <p>AI is thinking...</p>
+                </div>
+                <div id="ideas-list"></div>
+            </section>
+
+            <section id="saved-section" class="card">
+                <h2>3. Saved Ideas</h2>
+                <ul id="saved-list">
+                    <!-- Saved ideas will be dynamically inserted here -->
+                </ul>
+            </section>
+        </main>
+
+        <footer>
+            <p>Upgraded Project by AI | MIB-Style Innovation</p>
+        </footer>
+    </div>
     <script src="script.js"></script>
 </body>
 </html>
