@@ -8,9 +8,6 @@
 - **Secure Backend**: API key stays server-side—no client exposure.
 - **Easy Setup**: Runs locally with VSCode/Live Server; deployable to Vercel/Netlify.
 
-![UI Preview](https://via.placeholder.com/800x400/1e3c72/ffffff?text=EdgeAI+Idea+Spark+UI)  
-*(Replace with a screenshot once you have one!)*
-
 ## Prerequisites
 - [Node.js](https://nodejs.org/) (v18+; includes npm) – Install via your package manager (e.g., `sudo pacman -S nodejs npm` on Arch Linux).
 - [VSCode](https://code.visualstudio.com/) with extensions: Live Server (for frontend preview).
