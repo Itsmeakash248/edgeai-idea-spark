@@ -1,28 +1,42 @@
+
+import { marked } from 'https://cdn.jsdelivr.net/npm/marked/lib/marked.esm.js';
+
 const promptForm = document.getElementById('prompt-form');
 const promptInput = document.getElementById('prompt');
 const chatContainer = document.getElementById('chat-container');
+const loadingIndicator = document.getElementById('loading-indicator');
+
+// Helper to show/hide loading spinner
+function setLoading(visible) {
+  if (visible) {
+    loadingIndicator.classList.remove('hidden');
+    window.componentHandler && window.componentHandler.upgradeDom();
+  } else {
+    loadingIndicator.classList.add('hidden');
+  }
+}
 
 async function sendMessage(prompt) {
-  // Display user message
   appendMessage('user', prompt);
-
-  // Display loading indicator
-  const loadingMessage = appendMessage('ai', 'Generating... ✨', true);
+  setLoading(true);
 
   try {
     const res = await fetch(`http://localhost:3000/generate?prompt=${encodeURIComponent(prompt)}`);
-    const data = await res.json();
-    
-    // Remove loading indicator
-    chatContainer.removeChild(loadingMessage);
-
+    let data;
+    const contentType = res.headers.get('content-type');
+    if (contentType && contentType.includes('application/json')) {
+      data = await res.json();
+    } else {
+      data = { error: 'Invalid server response.' };
+    }
+    setLoading(false);
     if (res.ok) {
       appendMessage('ai', data.text);
     } else {
       appendMessage('ai', `Error: ${data.error}`);
     }
   } catch (error) {
-    chatContainer.removeChild(loadingMessage);
+    setLoading(false);
     appendMessage('ai', `Error: Connection failed—check if server is running.`);
   }
 }
@@ -37,7 +51,28 @@ function appendMessage(sender, text, isLoading = false) {
 
   const bubbleDiv = document.createElement('div');
   bubbleDiv.classList.add('message-bubble');
-  bubbleDiv.innerHTML = isLoading ? text : text.replace(/\n/g, '<br>');
+  bubbleDiv.innerHTML = isLoading ? text : (sender === 'ai' ? marked.parse(text) : text.replace(/\n/g, '<br>'));
+
+  // Add copy button for AI messages (not loading)
+  if (sender === 'ai' && !isLoading) {
+    const copyBtn = document.createElement('button');
+    copyBtn.className = 'copy-button';
+    copyBtn.type = 'button';
+    copyBtn.title = 'Copy to clipboard';
+    copyBtn.innerHTML = '📋';
+    copyBtn.setAttribute('aria-label', 'Copy AI message');
+    copyBtn.onclick = () => {
+      navigator.clipboard.writeText(text).then(() => {
+        copyBtn.classList.add('copied');
+        copyBtn.innerHTML = '✅';
+        setTimeout(() => {
+          copyBtn.classList.remove('copied');
+          copyBtn.innerHTML = '📋';
+        }, 1200);
+      });
+    };
+    bubbleDiv.appendChild(copyBtn);
+  }
 
   if (sender === 'user') {
     messageDiv.appendChild(bubbleDiv);
@@ -48,15 +83,15 @@ function appendMessage(sender, text, isLoading = false) {
   }
 
   chatContainer.appendChild(messageDiv);
-  chatContainer.scrollTop = chatContainer.scrollHeight; // Scroll to bottom
-  return messageDiv; // Return the message element for potential removal (e.g., loading)
+  chatContainer.scrollTop = chatContainer.scrollHeight;
+  window.componentHandler && window.componentHandler.upgradeDom();
+  return messageDiv;
 }
 
 promptForm.addEventListener('submit', (e) => {
   e.preventDefault();
   const prompt = promptInput.value.trim();
   if (!prompt) return;
-
   sendMessage(prompt);
   promptInput.value = '';
 });

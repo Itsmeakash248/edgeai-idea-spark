@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import 'dotenv/config';  // For .env API key
+import { marked } from 'marked';
 
 const app = express();
 app.use(cors());
@@ -18,7 +19,7 @@ app.get('/generate', async (req, res) => {
     const model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash' });
     const result = await model.generateContent(prompt);
     const response = await result.response;
-    res.json({ text: response.text() });
+    res.json({ text: marked.parse(response.text()) });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: error.message });
