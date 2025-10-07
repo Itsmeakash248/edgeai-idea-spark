@@ -3,11 +3,11 @@
 An interactive web app to generate edge-AI business ideas, inspired by my ESP32 AI chat project and MIB's ethos of sparking innovation.
 
 ## Local Run Instructions
-1. Clone: `git clone [repo-url]`
+1. Clone: `git clone [https://github.com/Itsmeakash248/edgeai-idea-spark]`
 2. Open `index.html` in browser. No setup—static JS magic!
 
 ## Design & Code Choices
-- Semantic HTML (<section>, <form>) for accessibility.
+- Semantic HTML for accessibility.
 - CSS animations/media queries for intuitive, responsive UX (fade-ins for engagement).
 - Vanilla JS with localStorage for functionality (randomized "AI" via templates—lightweight like embedded code; no external libs to keep it simple/original).
 - Originality: Built from scratch, drawing on my AI passions. Used Gemini for brainstorming templates, but all logic/code is mine—explains edge computing tie-in for entrepreneurship.
